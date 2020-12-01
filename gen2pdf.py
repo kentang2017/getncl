@@ -56,7 +56,7 @@ def genjpg(url):
     f_src = f_image_path.get_attribute('src')
     if not os.path.exists(title):
         os.mkdir(title)
-    f_file = urllib.request.urlretrieve(f_src, title+"/"+str(0).zfill(3)+".jpg")
+    f_file = urllib.request.urlretrieve(f_src, title+"/"+str(0).zfill(5)+".jpg")
     pageurl = []
     for i in pagenum:
         button = broswer.find_element_by_xpath('//*[@id="AftT"]')
@@ -64,7 +64,7 @@ def genjpg(url):
         time.sleep(3)
         image_path = broswer.find_element_by_xpath('//*[@id="ImageDisplay"]')
         src = image_path.get_attribute('src')
-        file = urllib.request.urlretrieve(src, title+"/"+str(i).zfill(3)+".jpg")
+        file = urllib.request.urlretrieve(src, title+"/"+str(i).zfill(5)+".jpg")
         print(str(i).zfill(3))
         pageurl.append(src)
     return pageurl
