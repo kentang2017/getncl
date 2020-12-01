@@ -38,6 +38,7 @@ output = Text(window, width=160, height=7, wrap=WORD, background="black")
 output.grid(row=5, column=0, sticky=W)
 
 
+
 def genjpg(url):
     chrome_options = Options()
     chrome_options.add_argument("--headless")
@@ -48,14 +49,16 @@ def genjpg(url):
         title = broswer.find_element_by_xpath('//*[@id="F1"]/table/tbody/tr[2]/td').text
         if "鈔本" in title == True:
             title = broswer.find_element_by_xpath('//*[@id="F1"]/table/tbody/tr[4]/td').text
-    pagenum = int(broswer.find_element_by_xpath('//*[@id="image-Detail"]/div[2]/table/tbody/tr/td/div/div[1]/div[2]/span').text.replace("/ ","")) + 1
+    
+    
+    pagenum = broswer.find_element_by_xpath('//*[@id="sel-content-no"]').text.replace("/ ","").split("\n")
     f_image_path = broswer.find_element_by_xpath('//*[@id="ImageDisplay"]')
     f_src = f_image_path.get_attribute('src')
     if not os.path.exists(title):
         os.mkdir(title)
     f_file = urllib.request.urlretrieve(f_src, title+"/"+str(0).zfill(3)+".jpg")
     pageurl = []
-    for i in range(1, pagenum):
+    for i in pagenum:
         button = broswer.find_element_by_xpath('//*[@id="AftT"]')
         ActionChains(broswer).click(button).perform()
         time.sleep(3)
