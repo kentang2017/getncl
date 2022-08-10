@@ -34,4 +34,4 @@ def genjpg(page, bookname):
     return pageurl
 	
 if __name__ == '__main__':
-    genjpg(244, "大六壬秘本")
+    genjpg(244, "三才演禽")
